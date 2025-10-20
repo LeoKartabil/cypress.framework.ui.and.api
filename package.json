@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress open",
-    "cy:run:prod": "npx cypress run --env configFile=prod",
-    "cy:open:prod": "npx cypress open --env configFile=prod",
+    "cy:run:prod": "npx cypress run --env configFile=prod ",
+    "cy:open:prod": "npx cypress open --env configFile=prod --browser=chrome --e2e",
     "cy:run:hml": "npx cypress run --env configFile=hml",
-    "cy:open:hml": "npx cypress open --env configFile=hml"
+    "cy:open:hml": "npx cypress open --env configFile=hml --browser=chrome --e2e"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,9 @@
   },
   "homepage": "https://github.com/LeoKartabil/cypress.framework.ui.and.api#readme",
   "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
     "ajv": "^8.17.1",
-    "cypress": "^15.4.0"
+    "cypress": "^15.4.0",
+    "cypress-fixture-faker": "^1.0.4"
   }
 }
