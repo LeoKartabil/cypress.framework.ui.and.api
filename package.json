@@ -8,7 +8,8 @@
     "cy:run:prod": "npx cypress run --env configFile=prod ",
     "cy:open:prod": "npx cypress open --env configFile=prod --browser=chrome --e2e",
     "cy:run:hml": "npx cypress run --env configFile=hml",
-    "cy:open:hml": "npx cypress open --env configFile=hml --browser=chrome --e2e"
+    "cy:open:hml": "npx cypress open --env configFile=hml --browser=chrome --e2e",
+    "clear-reports": "node ./cypress/support/clear-reports.js"
   },
   "repository": {
     "type": "git",
