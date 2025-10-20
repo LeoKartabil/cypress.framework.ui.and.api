@@ -1,0 +1,34 @@
+{
+  "name": "cypress.framework.ui.and.api",
+  "version": "1.0.0",
+  "description": "Accelerator for implementing cypress for user interface test automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open",
+    "cy:run:prod": "npx cypress run --env configFile=prod",
+    "cy:open:prod": "npx cypress open --env configFile=prod",
+    "cy:run:hml": "npx cypress run --env configFile=hml",
+    "cy:open:hml": "npx cypress open --env configFile=hml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeoKartabil/cypress.framework.ui.and.api.git"
+  },
+  "keywords": [
+    "cypress",
+    "test",
+    "automation",
+    "ui",
+    "api"
+  ],
+  "author": "Leonardo Kartabil (leonardo.kartabil@compasso.com.br)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LeoKartabil/cypress.framework.ui.and.api/issues"
+  },
+  "homepage": "https://github.com/LeoKartabil/cypress.framework.ui.and.api#readme",
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "cypress": "^15.4.0"
+  }
+}
