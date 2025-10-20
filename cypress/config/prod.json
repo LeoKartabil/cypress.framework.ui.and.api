@@ -1,7 +1,7 @@
 {
     "baseUrl": "https://www.advantageonlineshopping.com",
     "env": {
-        "apiUrl": "https://www.advantageonlineshopping.com/catalog/api/v1",
+        "apiUrl": "https://www.advantageonlineshopping.com",
         "global_timeout": 10000,
         "environment": "production"
     }

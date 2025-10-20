@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "Red": {
+      "type": "string"
+    },
+    "Gray": {
+      "type": "string"
+    },
+    "White": {
+      "type": "string"
+    },
+    "Blue": {
+      "type": "string"
+    },
+    "Purple": {
+      "type": "string"
+    },
+    "Yellow": {
+      "type": "string"
+    },
+    "Unassigned": {
+      "type": "string"
+    },
+    "Black": {
+      "type": "string"
+    },
+    "Turquoise": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Red",
+    "Gray",
+    "White",
+    "Blue",
+    "Purple",
+    "Yellow",
+    "Unassigned",
+    "Black",
+    "Turquoise"
+  ]
+}
