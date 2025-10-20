@@ -32,6 +32,7 @@
     "ajv": "^8.17.1",
     "cypress": "^15.4.0",
     "cypress-fixture-faker": "^1.0.4",
+    "cypress-mochawesome-reporter": "^4.0.2",
     "cypress-plugin-api": "^2.11.2"
   }
 }

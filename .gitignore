@@ -1,3 +1,6 @@
+#cypress
+reports/*
+
 # Logs
 logs
 *.log

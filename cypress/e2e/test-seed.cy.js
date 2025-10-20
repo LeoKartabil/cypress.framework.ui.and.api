@@ -1,6 +1,6 @@
 describe('Test Seed Data', () => {
     it('should load user seed data with faker values', () => {
-        cy.fixture('seeds/user.json').then((user) => {
+        cy.fixture('seeds/dynamic_user.json').then((user) => {
             cy.log(user)
             expect(user).to.have.property('fullName').that.is.a('string').and.is.not.empty;
             expect(user).to.have.property('gender').that.is.a('string').and.is.not.empty;

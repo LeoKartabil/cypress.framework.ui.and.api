@@ -31,7 +31,7 @@ describe('Advantage Shopping - Login', () => {
     context('Login com falha', () => {
         it('Deve exibir erro ao tentar login com usuário inválido', () => {
             cy.login('usuario_invalido', 'teste').then( () => {
-                cy.contains("Incorrect user name or password.").should("be.visible");
+                cy.contains("Incorrect user name or password. TESTE").should("be.visible");
             })
         });
 
