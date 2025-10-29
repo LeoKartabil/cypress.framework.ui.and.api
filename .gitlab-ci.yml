@@ -1,0 +1,180 @@
+image: cypress/browsers:node-20.11.0-chrome-121.0.6167.85-1-ff-120.0-edge-121.0.2277.83-1
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
+
+stages:
+  - install
+  - test
+  - report
+
+cache:
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - node_modules/
+    - .npm/
+    - cache/Cypress/
+
+# Job: Instalação de Dependências
+install_dependencies:
+  stage: install
+  script:
+    - npm ci
+    - npx cypress verify
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 day
+
+# Job: Testes no Ambiente DEV
+test_dev:
+  stage: test
+  needs: ["install_dependencies"]
+  script:
+    - npm ci
+    - npx cypress run --env configFile=dev --reporter mochawesome --reporter-options "reportDir=reports/mochawesome-report,overwrite=false,html=false,json=true"
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/
+      - reports/screenshots/
+      - reports/mochawesome-report/
+    reports:
+      junit: reports/mochawesome-report/*.xml
+    expire_in: 30 days
+  only:
+    - develop
+    - merge_requests
+
+# Job: Testes no Ambiente HML
+test_hml:
+  stage: test
+  needs: ["install_dependencies"]
+  script:
+    - npm ci
+    - npx cypress run --env configFile=hml --reporter mochawesome --reporter-options "reportDir=reports/mochawesome-report,overwrite=false,html=false,json=true"
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/
+      - reports/screenshots/
+      - reports/mochawesome-report/
+    reports:
+      junit: reports/mochawesome-report/*.xml
+    expire_in: 30 days
+  only:
+    - homologation
+    - merge_requests
+  when: manual
+
+# Job: Testes no Ambiente PROD
+test_prod:
+  stage: test
+  needs: ["install_dependencies"]
+  script:
+    - npm ci
+    - npx cypress run --env configFile=prod --reporter mochawesome --reporter-options "reportDir=reports/mochawesome-report,overwrite=false,html=false,json=true"
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/
+      - reports/screenshots/
+      - reports/mochawesome-report/
+    reports:
+      junit: reports/mochawesome-report/*.xml
+    expire_in: 30 days
+  only:
+    - main
+    - master
+  when: manual
+
+# Job: Gerar Relatório HTML Consolidado
+generate_report:
+  stage: report
+  needs: ["test_dev"]
+  script:
+    - npm ci
+    - npx mochawesome-merge reports/mochawesome-report/*.json > reports/mochawesome.json
+    - npx marge reports/mochawesome.json --reportDir reports/html-report --inline
+  artifacts:
+    when: always
+    paths:
+      - reports/html-report/
+    expire_in: 30 days
+  only:
+    - develop
+    - homologation
+    - main
+    - master
+    - merge_requests
+
+# Job: Testes Paralelos (Opcional)
+test_parallel:
+  stage: test
+  needs: ["install_dependencies"]
+  parallel: 3
+  script:
+    - npm ci
+    - npx cypress run --env configFile=dev --reporter mochawesome --reporter-options "reportDir=reports/mochawesome-report-$CI_NODE_INDEX,overwrite=false,html=false,json=true"
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/
+      - reports/screenshots/
+      - reports/mochawesome-report-*/
+    expire_in: 30 days
+  only:
+    - schedules
+  when: manual
+
+# Job: Testes em Múltiplos Navegadores
+test_chrome:
+  stage: test
+  needs: ["install_dependencies"]
+  script:
+    - npm ci
+    - npx cypress run --browser chrome --env configFile=dev
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/
+      - reports/screenshots/
+    expire_in: 7 days
+  only:
+    - schedules
+  when: manual
+
+test_firefox:
+  stage: test
+  needs: ["install_dependencies"]
+  script:
+    - npm ci
+    - npx cypress run --browser firefox --env configFile=dev
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/
+      - reports/screenshots/
+    expire_in: 7 days
+  only:
+    - schedules
+  when: manual
+
+test_edge:
+  stage: test
+  needs: ["install_dependencies"]
+  script:
+    - npm ci
+    - npx cypress run --browser edge --env configFile=dev
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/
+      - reports/screenshots/
+    expire_in: 7 days
+  only:
+    - schedules
+  when: manual

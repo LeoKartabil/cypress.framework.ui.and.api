@@ -1,0 +1,13 @@
+{
+    "username": "${faker.internet.username()}",
+    "email": "${faker.internet.email()}",
+    "password": "${faker.internet.password({ length: 12 })}",
+    "firstName": "${faker.person.firstName()}",
+    "lastName": "${faker.person.lastName()}",
+    "phone": "${faker.phone.number({ style: 'national' })}",
+    "country": "${faker.location.country()}",
+    "city": "${faker.location.city()}",
+    "address": "${faker.location.streetAddress()}",
+    "state": "${faker.location.state()}",
+    "postalCode": "${faker.location.zipCode()}"
+}

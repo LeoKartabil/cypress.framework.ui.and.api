@@ -1,6 +1,5 @@
 describe('Advantage Shopping - Login', () => {
     beforeEach(() => {
-        // Acessa a página antes de cada teste
         cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
         cy.visit('/');
     });
@@ -20,11 +19,13 @@ describe('Advantage Shopping - Login', () => {
     });
 
     context('Login com sucesso', () => {
-        it('Deve realizar login com credenciais válidas', () => {
+        it.only('Deve realizar login com credenciais válidas', () => {
             // * Implementar busca do usuário através da API para login
             // * Cadastrar um novo usuário e utilizá-lo para o login
             // * Possuir um usuário padrão com sync em procedures no banco de dados
-            cy.login('leokartabil', 'teste');
+            cy.login('QAutomation', 'zhcV@LJpnk3d');
+            cy.get('#menuUserLink span.hi-user').should('be.visible');
+            cy.get('#menuUserLink span.hi-user').should('have.text', 'QAutomation');
         });
     });
 
